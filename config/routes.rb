@@ -1,4 +1,4 @@
 Rails.application.routes.draw do
 
-  resources :books
+  resources :books, except: [:destroy, :update]
 end
