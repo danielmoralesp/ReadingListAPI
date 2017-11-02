@@ -1,12 +1,19 @@
 require 'test_helper'
 
 class CreatingBooksTest < ActionDispatch::IntegrationTest
+  setup do
+    @scifi = Genre.create!(name: 'Science Fiction')
+
+    @scifi.books.create!(title: 'Pragmatic Programmer')
+  end
+
   test "creates new books with valid data" do
+
     post '/books', params: { book: {
       title: 'Pragmatic Programmer',
       rating: 5,
       author: 'Dave Thomas',
-      genre_id: 1,
+      genre_id: @scifi,
       review: 'Excellent book for any programer.',
       amazon_id: '13123'
       }}.to_json,
